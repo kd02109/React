@@ -7,6 +7,7 @@ import Search from "../screen/Search";
 import color from "../color";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import * as Font from "expo-font";
+import MyStack from "./Stack";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ function MyTabs() {
   console.log(isDark);
   return (
     <Tab.Navigator
-      initialRouteName="Tv"
+      initialRouteName="Movies"
       screenOptions={{
         tabBarStyle: {
           backgroundColor: isDark ? color.black : color.white,
@@ -28,6 +29,9 @@ function MyTabs() {
           fontSize: 12,
           marginBottom: 2,
         },
+      }}
+      sceneContainerStyle={{
+        backgroundColor: isDark ? color.black : color.white,
       }}
     >
       <Tab.Screen

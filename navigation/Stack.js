@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const ScreenOne = ({ navigation: { navigate } }) => {
   return (
@@ -16,9 +16,9 @@ const ScreenTwo = ({ navigation: { navigate } }) => {
     </TouchableOpacity>
   );
 };
-const ScreenThree = ({ navigation: { goBack, setOptions } }) => {
+const ScreenThree = ({ navigation: { setOptions, navigate } }) => {
   return (
-    <TouchableOpacity onPress={() => goBack("Three")}>
+    <TouchableOpacity onPress={() => navigate("Tabs", { screen: "Search" })}>
       <Text>Three</Text>
     </TouchableOpacity>
   );
@@ -28,12 +28,18 @@ const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        animation: "fade_from_bottom",
+      }}
+    >
       <Stack.Screen name="One" component={ScreenOne} />
       <Stack.Screen name="Two" component={ScreenTwo} />
       <Stack.Screen name="Three" component={ScreenThree} />
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({});
 
 export default MyStack;

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, useColorScheme } from "react-native";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -12,11 +12,15 @@ import {
 } from "@react-navigation/native";
 import Tabs from "./navigation/tab";
 import MyStack from "./navigation/Stack";
+import RootNav from "./navigation/Root";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const isDark = useColorScheme() === "dark";
   useEffect(() => {
     async function prepare() {
       try {
@@ -45,9 +49,11 @@ export default function App() {
     return null;
   }
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <MyStack />
-    </NavigationContainer>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <NavigationContainer onReady={onLayoutRootView}>
+        <RootNav />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

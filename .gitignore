@@ -2,6 +2,8 @@
 #
 .DS_Store
 
+# code
+api.js
 # Xcode
 #
 build/
